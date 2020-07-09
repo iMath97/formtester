@@ -1,20 +1,21 @@
 // vars
 let errors = {
     typeCustomer: "",
-    firstname: {empty: true, containsNumbers: false},
-    lastname: {empty: true},
-    mail: {empty: true},
+    firstname: {containsNumbers: false},
+    lastname: {},
+    mail: {},
     phonecountry: "",
     phonenumber: "",
-    street: {empty: true},
-    housenumber: {empty: true},
-    postalcode: {empty: true},
-    city: {empty: true},
+    street: {},
+    housenumber: {},
+    postalcode: {},
+    city: {},
     deliverydate: "",
     pickupdate: "",
     note: "",
     hasError: false
 };
+let errorcodes = [];
 let focussedElement;
 let data = {
     typeCustomer: "",
@@ -75,15 +76,15 @@ form.addEventListener('input', () => {
         case 'firstname':
             data.firstname = this.document.activeElement.value;
             
-            if(isEmpty(data.firstname)){
-                errors.firstname.empty = true;
-            } else {
-                errors.firstname.empty = false;
-            }
             if(containsNumber(data.firstname)){
                 errors.firstname.containsNumbers = true;
             } else {
                 errors.firstname.containsNumbers = false;
+                for(let i = 0; i<errorcodes.length; i++){
+                    if(errorcodes[i] == "firstnameerrornumbers"){
+                        let errorlog = errorParagraph.removeChild('.firstnameerrornumbers');
+                    }
+                }
             }
             break;
     
@@ -93,6 +94,7 @@ form.addEventListener('input', () => {
 });
 
 // update the errors
+updateErrors();
 function updateErrors(){
     checkForErrors();
     updateHasError();
@@ -104,34 +106,46 @@ function updateErrors(){
 }
 
 function checkForErrors(){
-    console.log('called');
     // firstname
-    if(errors.firstname.empty){
-        createErrorLog("Voornaam kan niet leeg zijn", focussedElement);
-    }
     if(errors.firstname.containsNumbers){
-        createErrorLog("Voornaam kan geen nummers bevatten", focussedElement);
+        createErrorLog("Voornaam kan geen nummers bevatten", focussedElement, "numbers");
     }
 }
 
-function createErrorLog(text, id){
+function createErrorLog(text, id, type){
+    let log = id + "error" + type
     let paragraph = document.createElement("p");
-    paragraph.classList.add(id);
+    paragraph.classList.add(log);
     paragraph.innerText = text;
 
     errorParagraph.appendChild(paragraph);
-    console.log(paragraph);
+    errorcodes.push(log);
 }
 
 function updateHasError(){
-    if(errors.firstname.empty || errors.firstname.containsNumbers || errors.lastname.empty || errors.mail.empty || errors.street.empty || errors.housenumber.empty || errors.postalcode.empty || errors.city.empty){
+    if(errors.firstname.containsNumbers){
         errors.hasError = true;
     } else {
         errors.hasError = false;
     }
 }
 
+// send button
+sendBTN.addEventListener('click', () => {
+    let emptyFields = checkEmptyFields();
+});
+
+
 // validation functions
+
+function checkEmptyFields(){
+    if(isEmpty(data.firstname) || isEmpty(data.lastname) || isEmpty(data.mail) || isEmpty(data.street) || isEmpty(data.housenumber) || isEmpty(data.postalcode) || isEmpty(data.city)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function isEmpty(value){
     if(value.length == 0){
         return true;
