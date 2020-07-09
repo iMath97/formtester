@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form validation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <form>
+                <div class="errors">
+                    <p>Er zijn enkele problemen met de gegevens die je hebt ingevult:</p>
+                </div>
+                <input type="radio" name="typeCustomer" id="particulier" value="particulier" onclick="getTypeCustomer(this.value)">
+                <label for="particulier">Particulier</label>
+                <input type="radio" name="typeCustomer" id="aannemer" value="aannemer" onclick="getTypeCustomer(this.value)">
+                <label for="aannemer">Aannemer</label><br>
+                <label for="firstname">Voornaam*</label>
+                <input type="text" name="firstname" id="firstname">
+                <label for="lastname">Achternaam*</label>
+                <input type="text" name="lastname" id="lastname"><br>
+                <label for="mail">E-mail*</label>
+                <input type="email" name="mail" id="mail"><br>
+                <label for="phonecountry">Telefoon</label>
+                <input type="text" name="phonecountry" id="phonecountry">
+                <input type="text" name="phonenumber" id="phonenumber"><br>
+                <label for="street">Straat*</label>
+                <input type="text" name="street" id="street">
+                <label for="housenumber">Huisnummer*</label>
+                <input type="text" name="housenumber" id="housenumber"><br>
+                <label for="postalcode">Postcode*</label>
+                <input type="text" name="postalcode" id="postalcode">
+                <label for="city">Stad of gemeente*</label>
+                <input type="text" name="city" id="city"><br>
+                <label for="delivery">Datum levering</label>
+                <input type="date" name="delivery" id="delivery">
+                <label for="pickup">Datum ophaling</label>
+                <input type="date" name="pickup" id="pickup"><br>
+                <label for="note">Opmerkingen?</label><br>
+                <textarea name="note" id="note" cols="30" rows="10"></textarea><br>
+                <input type="checkbox" name="privacy" id="privacy">
+                <label for="privacy">Ik ga akkoord met de privacy voorwaarden</label><br>
+                <button id="send">Verstuur</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/formhandler.js"></script>
+</body>
+</html>
