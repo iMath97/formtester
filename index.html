@@ -13,7 +13,7 @@
                 <div class="errors">
                     <p>Er zijn enkele problemen met de gegevens die je hebt ingevult:</p>
                 </div>
-                <input type="radio" name="typeCustomer" id="particulier" value="particulier" onclick="getTypeCustomer(this.value)">
+                <input type="radio" name="typeCustomer" id="particulier" value="particulier" onclick="getTypeCustomer(this.value)" checked>
                 <label for="particulier">Particulier</label>
                 <input type="radio" name="typeCustomer" id="aannemer" value="aannemer" onclick="getTypeCustomer(this.value)">
                 <label for="aannemer">Aannemer</label><br>
@@ -24,7 +24,7 @@
                 <label for="mail">E-mail*</label>
                 <input type="email" name="mail" id="mail"><br>
                 <label for="phonecountry">Telefoon</label>
-                <input type="text" name="phonecountry" id="phonecountry">
+                <input type="text" name="phonecountry" id="phonecountry" placeholder="+00">
                 <input type="text" name="phonenumber" id="phonenumber"><br>
                 <label for="street">Straat*</label>
                 <input type="text" name="street" id="street">
