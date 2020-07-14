@@ -3,7 +3,6 @@ let errors = {
     firstname: {containsNumbers: false},
     lastname: {containsNumbers: false},
     mail: {isValidMail: true},
-    phonecountry: {isValid: true},
     phonenumber: {isNumeric: false},
     postalcode: {isNumeric: false, isMaxLength: true},
     hasError: false,
@@ -12,7 +11,7 @@ let errors = {
 };
 let errorcodes = [];
 let focussedElement;
-let data = {typeCustomer: "Particulier", firstname: "", lastname: "", mail: "", phonecountry: "", phonenumber: "", street: "", housenumber: "", postalcode: "", city: "", deliverydate: "", pickupdate: "", note: ""};
+let data = {typeCustomer: "Particulier", firstname: "", lastname: "", mail: "", phonenumber: "", street: "", housenumber: "", postalcode: "", city: "", deliverydate: "", pickupdate: "", note: ""};
 let formActivated = false;
 
 // dom elements
@@ -21,7 +20,6 @@ let form = document.querySelector('form');
 let firstname = document.querySelector('#firstname');
 let lastname = document.querySelector('#lastname');
 let mail = document.querySelector('#mail');
-let phonecountry = document.querySelector('#phonecountry');
 let phonenumber = document.querySelector('#phonenumber');
 let street = document.querySelector('#street');
 let housenumber = document.querySelector('#housenumber');
@@ -48,7 +46,6 @@ form.addEventListener('change', () => {
     data.firstname = firstname.value;
     data.lastname = lastname.value;
     data.mail = mail.value;
-    data.phonecountry = phonecountry.value;
     data.phonenumber = phonenumber.value;
     data.street = street.value;
     data.housenumber = housenumber.value;
@@ -81,7 +78,7 @@ function updateErrors(){
 }
 
 function updateHasError(){
-    if(errors.firstname.containsNumbers || errors.lastname.containsNumbers || errors.mail.isValidMail == false || errors.phonecountry.isValid == false || errors.phonenumber.isNumeric || errors.postalcode.isNumeric || errors.postalcode.isMaxLength == false || errors.empty || errors.privacyChecked == false){
+    if(errors.firstname.containsNumbers || errors.lastname.containsNumbers || errors.mail.isValidMail == false || errors.phonenumber.isNumeric || errors.postalcode.isNumeric || errors.postalcode.isMaxLength == false || errors.empty || errors.privacyChecked == false){
         errors.hasError = true;
     } else {
         errors.hasError = false;
@@ -101,10 +98,6 @@ function checkForErrors(){
     // mail
     if(errors.mail.isValidMail == false){
         createErrorLog("Ongeldig mail adres", "mail", "notvalid");
-    }
-    // phonecountry
-    if(errors.phonecountry.isValid == false){
-        createErrorLog("Telefoon landcode start met een + gevolgd door cijfers", "phonecountry", "numeric");
     }
     // phonenumber
     if(errors.phonenumber.isNumeric){
@@ -190,34 +183,6 @@ function validateUserInput(){
                     errorcodes[i] = "";
                     errorParagraph.removeChild(document.querySelector('.mailerrornotvalid'));
                 }
-            }
-        }
-    }
-
-    // phonecountry
-    let phonecountryParts = data.phonecountry.split("");
-    console.log(phonecountryParts);
-
-    if(startsWith("+", data.phonecountry)){
-        errors.phonecountry.isValid = true;
-    } else {
-        errors.phonecountry.isValid = false;
-        for(let i = 0; i<errorcodes.length; i++){
-            if(errorcodes[i] == "phonecountryerrornumeric"){
-                errorcodes[i] = "";
-                errorParagraph.removeChild(document.querySelector('.phonecountryerrornumeric'));
-            }
-        }
-    }
-
-    if(isNumericArray(phonecountryParts)){
-        errors.phonecountry.isValid = true;
-    } else {
-        errors.phonecountry.isValid = false;
-        for(let i = 0; i<errorcodes.length; i++){
-            if(errorcodes[i] == "phonecountryerrornumeric"){
-                errorcodes[i] = "";
-                errorParagraph.removeChild(document.querySelector('.phonecountryerrornumeric'));
             }
         }
     }
@@ -437,7 +402,6 @@ function getValuesForm(){
     console.log("firstname: " + data.firstname);
     console.log("lastname: " + data.lastname);
     console.log("mail: " + data.mail);
-    console.log("phonecountry: " + data.phonecountry);
     console.log("phonenumber: " + data.phonenumber);
     console.log("street: " + data.street);
     console.log("housenumber: " + data.housenumber);
